@@ -39,7 +39,7 @@ https://yuktrium.github.io/Animated-404-Page/
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/yuktrium/Animated-404-Error-Page.git
+git clone https://github.com/yuktrium/Animated-404-Page
 ```
 
 Open `index.html` in your browser.
