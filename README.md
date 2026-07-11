@@ -4,7 +4,7 @@ A premium and interactive **Animated 404 Error Page** built using **HTML, CSS, a
 
 ## 🚀 Live Demo
 
-https://yuktrium.github.io/Animated-404-Error-Page/
+https://yuktrium.github.io/Animated-404-Page/
 
 ## ✨ Features
 
