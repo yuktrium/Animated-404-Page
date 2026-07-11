@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Lost in the Storm</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scene" id="scene">
+      <div class="lightning-overlay"></div>
+
+      <div class="cloud cloud3"></div>
+      <div class="cloud cloud1"></div>
+      <div class="cloud cloud2"></div>
+
+      <div class="rain" id="rain"></div>
+
+      <div class="error-code">404</div>
+
+      <div class="dialogue" id="dialogue">
+        <p class="line1">Oh no&hellip;</p>
+        <p class="line2">I couldn't find this page.</p>
+      </div>
+
+      <div class="mascot-wrap" id="mascotWrap">
+        <svg viewBox="0 0 200 200">
+          <g class="mascot-body">
+            <!-- tail -->
+            <path
+              class="tail"
+              d="M150 130 C185 110, 190 60, 165 40 C178 65, 172 100, 150 118 Z"
+            />
+
+            <!-- sparks (shown on excited) -->
+            <polygon
+              class="spark s1"
+              points="30,60 36,72 26,72"
+              fill="var(--spark-yellow)"
+            />
+            <polygon
+              class="spark s2"
+              points="170,50 176,64 164,64"
+              fill="var(--spark-yellow)"
+            />
+            <polygon
+              class="spark s3"
+              points="20,110 27,122 15,122"
+              fill="var(--spark-yellow)"
+            />
+
+            <!-- body -->
+            <ellipse
+              cx="100"
+              cy="140"
+              rx="46"
+              ry="42"
+              fill="var(--spark-yellow)"
+            />
+
+            <!-- arm (wave) -->
+            <ellipse
+              class="arm-wave"
+              cx="58"
+              cy="120"
+              rx="12"
+              ry="22"
+              fill="var(--spark-yellow)"
+            />
+            <ellipse
+              cx="142"
+              cy="120"
+              rx="12"
+              ry="22"
+              fill="var(--spark-yellow)"
+            />
+
+            <!-- feet -->
+            <ellipse
+              cx="78"
+              cy="182"
+              rx="16"
+              ry="9"
+              fill="var(--spark-yellow-dark)"
+            />
+            <ellipse
+              cx="122"
+              cy="182"
+              rx="16"
+              ry="9"
+              fill="var(--spark-yellow-dark)"
+            />
+
+            <g class="head-group">
+              <!-- ears -->
+              <path
+                class="ear ear-left"
+                d="M70 55 C55 15, 40 10, 35 20 C48 30, 58 48, 68 62 Z"
+                fill="var(--spark-yellow)"
+              />
+              <path
+                class="ear ear-right"
+                d="M130 55 C145 15, 160 10, 165 20 C152 30, 142 48, 132 62 Z"
+                fill="var(--spark-yellow)"
+              />
+              <path
+                d="M65 25 C55 15, 42 15, 37 21"
+                fill="none"
+                stroke="#2a2410"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity=".5"
+              />
+              <path
+                d="M135 25 C145 15, 158 15, 163 21"
+                fill="none"
+                stroke="#2a2410"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity=".5"
+              />
+
+              <!-- head -->
+              <circle cx="100" cy="95" r="50" fill="var(--spark-yellow)" />
+
+              <!-- cheeks -->
+              <circle class="cheek" cx="65" cy="100" r="9" />
+              <circle class="cheek" cx="135" cy="100" r="9" />
+
+              <!-- eyes -->
+              <g class="eye eye-normal">
+                <ellipse cx="82" cy="90" rx="7" ry="9" fill="#1a1530" />
+                <ellipse
+                  class="pupil"
+                  cx="82"
+                  cy="90"
+                  rx="7"
+                  ry="9"
+                  fill="#1a1530"
+                />
+                <circle cx="84" cy="87" r="2" fill="#fff" />
+              </g>
+              <g class="eye eye-normal">
+                <ellipse cx="118" cy="90" rx="7" ry="9" fill="#1a1530" />
+                <ellipse
+                  class="pupil"
+                  cx="118"
+                  cy="90"
+                  rx="7"
+                  ry="9"
+                  fill="#1a1530"
+                />
+                <circle cx="120" cy="87" r="2" fill="#fff" />
+              </g>
+              <!-- sad eyes -->
+              <path
+                class="eye-sad"
+                d="M75 92 Q82 84, 89 92"
+                fill="none"
+                stroke="#1a1530"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                class="eye-sad"
+                d="M111 92 Q118 84, 125 92"
+                fill="none"
+                stroke="#1a1530"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+
+              <!-- tear -->
+              <path
+                class="tear"
+                d="M82 100 C79 106, 79 112, 82 114 C85 112, 85 106, 82 100 Z"
+                fill="#9ecbff"
+              />
+
+              <!-- mouths -->
+              <path
+                class="mouth-normal"
+                d="M92 112 Q100 118, 108 112"
+                fill="none"
+                stroke="#1a1530"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <path
+                class="mouth-smile"
+                d="M88 110 Q100 124, 112 110"
+                fill="none"
+                stroke="#1a1530"
+                stroke-width="3.5"
+                stroke-linecap="round"
+              />
+              <path
+                class="mouth-sad"
+                d="M90 118 Q100 108, 110 118"
+                fill="none"
+                stroke="#1a1530"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="home-btn-wrap" id="homeBtnWrap">
+        <button class="home-btn" id="homeBtn" aria-label="Go home"></button>
+        <span class="home-label">Home</span>
+      </div>
+    </div>
+
+    <div class="redirect-fade" id="redirectFade"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

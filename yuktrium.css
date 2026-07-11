@@ -1,0 +1,563 @@
+:root {
+  --bg-deep: #080b1f;
+  --bg-mid: #141a45;
+  --cloud: #232a63;
+  --cloud-light: #333c82;
+  --rain: #8fa4ff;
+  --spark-yellow: #ffe066;
+  --spark-yellow-dark: #f2b705;
+  --spark-dull: #7a744a;
+  --cheek-glow: #ff9d3d;
+  --text: #eef0ff;
+  --text-dim: #9aa3d6;
+  --lightning: #f5f7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-deep);
+  overflow: hidden;
+  font-family:
+    -apple-system, "Segoe UI Rounded", "Segoe UI", Verdana, sans-serif;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(
+    ellipse at 50% 15%,
+    var(--bg-mid) 0%,
+    var(--bg-deep) 65%
+  );
+  overflow: hidden;
+}
+
+/* ---------- Lightning flash overlay ---------- */
+.lightning-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--lightning);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: flash 7s infinite;
+}
+@keyframes flash {
+  0%,
+  4% {
+    opacity: 0;
+  }
+  4.4% {
+    opacity: 0.55;
+  }
+  4.6% {
+    opacity: 0.1;
+  }
+  4.9% {
+    opacity: 0.4;
+  }
+  5.2% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Clouds ---------- */
+.cloud {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--cloud);
+  filter: blur(1px);
+  opacity: 0.85;
+}
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+.cloud1 {
+  width: 220px;
+  height: 70px;
+  top: 6%;
+  left: -20%;
+  animation: drift 26s linear infinite;
+}
+.cloud1::before {
+  width: 110px;
+  height: 110px;
+  top: -45px;
+  left: 20px;
+}
+.cloud1::after {
+  width: 90px;
+  height: 90px;
+  top: -30px;
+  left: 110px;
+}
+.cloud2 {
+  width: 160px;
+  height: 55px;
+  top: 16%;
+  left: -25%;
+  background: var(--cloud-light);
+  animation: drift 34s linear infinite;
+  animation-delay: -8s;
+}
+.cloud2::before {
+  width: 80px;
+  height: 80px;
+  top: -32px;
+  left: 15px;
+}
+.cloud2::after {
+  width: 65px;
+  height: 65px;
+  top: -22px;
+  left: 80px;
+}
+.cloud3 {
+  width: 260px;
+  height: 80px;
+  top: 2%;
+  left: -30%;
+  opacity: 0.6;
+  animation: drift 42s linear infinite;
+  animation-delay: -20s;
+}
+.cloud3::before {
+  width: 130px;
+  height: 130px;
+  top: -55px;
+  left: 25px;
+}
+.cloud3::after {
+  width: 100px;
+  height: 100px;
+  top: -35px;
+  left: 140px;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(140vw);
+  }
+}
+
+/* ---------- Rain ---------- */
+.rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.drop {
+  position: absolute;
+  top: -10%;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--rain));
+  opacity: 0.5;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  from {
+    transform: translateY(-10vh);
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+/* ---------- 404 giant text ---------- */
+.error-code {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: min(28vw, 260px);
+  font-weight: 800;
+  letter-spacing: -4px;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(143, 164, 255, 0.35);
+  text-stroke: 2px rgba(143, 164, 255, 0.35);
+  opacity: 0;
+  z-index: 1;
+  user-select: none;
+  transition: opacity 1.2s ease;
+}
+.scene.spotted .error-code {
+  opacity: 1;
+}
+
+/* ---------- Dialogue text ---------- */
+.dialogue {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--text);
+  opacity: 0;
+  z-index: 5;
+  transition: opacity 1s ease;
+  max-width: 90vw;
+}
+.dialogue.show {
+  opacity: 1;
+}
+.dialogue .line1 {
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.dialogue .line2 {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--text-dim);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ---------- Mascot ---------- */
+.mascot-wrap {
+  position: absolute;
+  bottom: 14%;
+  left: -15%;
+  width: 200px;
+  height: 200px;
+  z-index: 4;
+  transition: left 2.6s cubic-bezier(0.33, 1, 0.4, 1);
+}
+.scene.walked-in .mascot-wrap {
+  left: calc(50% - 100px);
+}
+
+.mascot-wrap svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mascot-body {
+  transform-origin: 100px 140px;
+}
+
+.ear {
+  transform-origin: var(--ear-origin-x) var(--ear-origin-y);
+  transition: transform 1.4s ease;
+}
+.ear-left {
+  --ear-origin-x: 70px;
+  --ear-origin-y: 55px;
+}
+.ear-right {
+  --ear-origin-x: 130px;
+  --ear-origin-y: 55px;
+}
+.scene.sad .ear-left {
+  transform: rotate(22deg);
+}
+.scene.sad .ear-right {
+  transform: rotate(-22deg);
+}
+
+.head-group {
+  transform-origin: 100px 90px;
+  transition: transform 0.5s ease;
+}
+.scene.look-left .head-group {
+  transform: rotate(-10deg) translateX(-6px);
+}
+.scene.look-right .head-group {
+  transform: rotate(10deg) translateX(6px);
+}
+
+.eye {
+  transition: transform 0.4s ease;
+}
+.pupil {
+  transition: transform 0.3s ease;
+}
+.scene.look-left .pupil {
+  transform: translateX(-3px);
+}
+.scene.look-right .pupil {
+  transform: translateX(3px);
+}
+
+.eye-sad {
+  transform-origin: center;
+}
+.scene.sad .eye-normal {
+  opacity: 0;
+}
+.scene.sad .eye-sad {
+  opacity: 1;
+}
+.eye-sad {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tear {
+  opacity: 0;
+  transform: translateY(0);
+}
+.scene.sad .tear {
+  animation: drip 1.8s ease-in 0.3s 1 forwards;
+}
+@keyframes drip {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(2px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(26px) scale(0.8);
+  }
+}
+
+.mouth-normal,
+.mouth-smile,
+.mouth-sad {
+  transition: opacity 0.4s ease;
+}
+.mouth-smile,
+.mouth-sad {
+  opacity: 0;
+}
+.scene.sad .mouth-normal {
+  opacity: 0;
+}
+.scene.sad .mouth-sad {
+  opacity: 1;
+}
+
+.cheek {
+  fill: var(--cheek-glow);
+  transition:
+    opacity 0.5s ease,
+    filter 0.5s ease;
+  filter: drop-shadow(0 0 0px var(--cheek-glow));
+}
+.scene.sad .cheek {
+  opacity: 0.35;
+  filter: none;
+}
+.mascot-wrap.excited .cheek {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 10px var(--cheek-glow))
+    drop-shadow(0 0 18px var(--spark-yellow));
+}
+.mascot-wrap.excited .mouth-sad {
+  opacity: 0 !important;
+}
+.mascot-wrap.excited .mouth-smile {
+  opacity: 1 !important;
+}
+
+.tail {
+  fill: var(--spark-yellow);
+  transition:
+    fill 0.8s ease,
+    filter 0.8s ease;
+  filter: drop-shadow(0 0 8px var(--spark-yellow-dark));
+  transform-origin: 150px 120px;
+}
+.scene.sad .tail {
+  fill: var(--spark-dull);
+  filter: none;
+}
+.mascot-wrap.excited .tail {
+  fill: var(--spark-yellow) !important;
+  filter: drop-shadow(0 0 14px var(--spark-yellow)) !important;
+  animation: tailwag 0.5s ease-in-out infinite alternate;
+}
+@keyframes tailwag {
+  from {
+    transform: rotate(-6deg);
+  }
+  to {
+    transform: rotate(6deg);
+  }
+}
+
+.spark {
+  opacity: 0;
+  transform-origin: center;
+}
+.mascot-wrap.excited .spark {
+  animation: sparkle 1s ease-in-out infinite;
+}
+.mascot-wrap.excited .spark.s2 {
+  animation-delay: 0.2s;
+}
+.mascot-wrap.excited .spark.s3 {
+  animation-delay: 0.4s;
+}
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.1) rotate(20deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(40deg);
+  }
+}
+
+.mascot-wrap.waving .arm-wave {
+  animation: wave 0.5s ease-in-out 3;
+  transform-origin: 60px 115px;
+}
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+}
+
+/* ---------- Button ---------- */
+.home-btn-wrap {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s ease;
+  text-align: center;
+}
+.scene.ready .home-btn-wrap {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.home-btn {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  border: 4px solid #0d1230;
+  cursor: pointer;
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    #f4f6ff 0%,
+    #f4f6ff 46%,
+    #0d1230 46%,
+    #0d1230 54%,
+    var(--spark-yellow-dark) 54%,
+    var(--spark-yellow) 100%
+  );
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.home-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  background: #0d1230;
+  border: 3px solid #f4f6ff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.home-btn .bolt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  fill: var(--spark-yellow);
+  filter: drop-shadow(0 0 0px var(--spark-yellow));
+  transition: filter 0.3s ease;
+}
+.home-btn-wrap:hover .home-btn {
+  transform: scale(1.08);
+  animation: pulse 1s ease-in-out infinite;
+  box-shadow:
+    0 6px 26px rgba(255, 224, 102, 0.55),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+.home-btn-wrap:hover .home-btn .bolt {
+  filter: drop-shadow(0 0 6px var(--spark-yellow));
+}
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 6px 18px rgba(255, 224, 102, 0.4),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 6px 30px rgba(255, 224, 102, 0.75),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+  }
+}
+.home-label {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Fade to redirect ---------- */
+.redirect-fade {
+  position: fixed;
+  inset: 0;
+  background: var(--lightning);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  transition: opacity 1s ease;
+}
+.redirect-fade.active {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud,
+  .drop,
+  .lightning-overlay,
+  .tail,
+  .spark,
+  .home-btn-wrap:hover .home-btn {
+    animation: none !important;
+  }
+}
